@@ -10,7 +10,7 @@ import ProtectedRoute from './components/ProtectedRoute.jsx';
 import MeusPalpites from './pages/MeusPalpites.jsx';
 import Palpitar from './pages/Palpitar.jsx';
 import PerfilParticipante from './pages/PerfilParticipante.jsx';
-import Jogos from './pages/JOGOS.JSX';
+import Jogos from './pages/Jogos.jsx';
 
 function App() {
   return (
