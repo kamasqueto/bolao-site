@@ -96,7 +96,6 @@ router.get('/:id', verificarToken, async (req, res) => {
     });
 
   } catch (err) {
-    console.error('Erro ao buscar usuário:', err);
     res.status(500).json({ error: 'Erro interno ao buscar perfil do usuário' });
   }
 });

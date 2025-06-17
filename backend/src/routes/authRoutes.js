@@ -11,7 +11,6 @@ const prisma = new PrismaClient();
 
 // Registro de usuário
 router.post("/register", async (req, res) => {
-    console.log("Dados recebidos no cadastro:", req.body);
 
     const { name, email, password } = req.body;
 
