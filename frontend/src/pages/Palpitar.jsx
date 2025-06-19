@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import { useAuthRedirect } from '../hooks/useAuthRedirect';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Palpitar() {
   useAuthRedirect();
