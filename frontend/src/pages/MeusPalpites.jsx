@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuthRedirect } from '../hooks/useAuthRedirect';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function MeusPalpites() {
   useAuthRedirect();
@@ -11,7 +12,7 @@ export default function MeusPalpites() {
     async function carregarPalpites() {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('http://localhost:3000/api/guesses/me', {
+        const res = await axios.get(`${API_URL}/api/guesses/me`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setPalpites(res.data);

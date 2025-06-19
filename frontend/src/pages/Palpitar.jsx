@@ -17,13 +17,13 @@ export default function Palpitar() {
         const token = localStorage.getItem('token');
 
         const [resJogos, resPalpites, resOutros] = await Promise.all([
-          axios.get('http://localhost:3000/api/games', {
+          axios.get(`${API_URL}/api/games`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          axios.get('http://localhost:3000/api/guesses/me', {
+          axios.get(`${API_URL}/api/guesses/me`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          axios.get('http://localhost:3000/api/guesses/all', {
+          axios.get(`${API_URL}/api/guesses/all`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
         ]);

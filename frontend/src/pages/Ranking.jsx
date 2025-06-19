@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaMedal, FaUserCircle } from 'react-icons/fa';
 import { useAuthRedirect } from '../hooks/useAuthRedirect';
-import {Link} from "react-router-dom"
+import {Link} from "react-router-dom";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Ranking() {
   useAuthRedirect();
@@ -14,7 +15,7 @@ export default function Ranking() {
     async function carregarRanking() {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('http://localhost:3000/api/ranking', {
+        const res = await axios.get(`${API_URL}/api/ranking`, {
           headers: {
             Authorization: `Bearer ${token}`
           }

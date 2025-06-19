@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import dayjs from 'dayjs';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function PerfilParticipante() {
   const { id } = useParams();
@@ -12,7 +13,7 @@ export default function PerfilParticipante() {
     async function carregarPerfil() {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get(`http://localhost:3000/api/users/${id}`, {
+        const res = await axios.get(`${API_URL}/api/users/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setPerfil(res.data);

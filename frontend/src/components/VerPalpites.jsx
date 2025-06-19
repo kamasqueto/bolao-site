@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Palpitar() {
   const [jogos, setJogos] = useState([]);
@@ -13,10 +14,10 @@ export default function Palpitar() {
         const token = localStorage.getItem('token');
 
         const [resJogos, resPalpites] = await Promise.all([
-          axios.get('http://localhost:3000/api/games', {
+          axios.get(`${API_URL}/api/games`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          axios.get('http://localhost:3000/api/guesses/me', {
+          axios.get(`${API_URL}/api/guesses/me`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
         ]);
@@ -61,7 +62,7 @@ export default function Palpitar() {
       const token = localStorage.getItem('token');
       const { scoreA, scoreB } = placares[jogoId] || {};
 
-      await axios.post(`http://localhost:3000/api/guesses`, {
+      await axios.post(`${API_URL}/api/guesses`, {
         gameId: jogoId,
         guessA: Number(scoreA),
         guessB: Number(scoreB),

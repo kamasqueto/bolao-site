@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Cadastro() {
   const [name, setName] = useState('');
@@ -16,7 +17,7 @@ export default function Cadastro() {
     setTipoMensagem(null);
 
     try {
-      await axios.post('http://localhost:3000/api/auth/register', {
+      await axios.post(`${API_URL}/api/auth/register`, {
         name,
         email,
         password,

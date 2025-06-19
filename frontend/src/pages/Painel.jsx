@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuthRedirect } from '../hooks/useAuthRedirect';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function AdminResultados() {
   useAuthRedirect();
@@ -12,7 +13,7 @@ export default function AdminResultados() {
     try {
       const token = localStorage.getItem('token');
 
-      const res = await axios.get('http://localhost:3000/api/admin/jogos', {
+      const res = await axios.get(`${API_URL}/api/admin/jogos`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -30,7 +31,7 @@ export default function AdminResultados() {
 
   const atualizarPlacar = async (id, scoreA, scoreB) => {
     try {
-      await axios.put(`http://localhost:3000/api/admin/jogos/${id}`, {
+      await axios.put(`${API_URL}/api/admin/jogos${id}`, {
         scoreA: Number(scoreA),
         scoreB: Number(scoreB),
         headers: {
