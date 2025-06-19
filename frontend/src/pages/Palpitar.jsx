@@ -76,14 +76,14 @@ export default function Palpitar() {
     const token = localStorage.getItem('token');
     const { scoreA, scoreB } = placares[jogoId] || {};
 
-    const resExistente = await axios.get(`http://localhost:3000/api/guesses/mine/${jogoId}`, {
+    const resExistente = await axios.get(`${API_URL}/api/guesses/mine/${jogoId}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
     if (resExistente.data) {
       // Atualiza palpite existente
       console.log(resExistente.data);
-      await axios.put(`http://localhost:3000/api/guesses/${resExistente.data.id}`, {
+      await axios.put(`${API_URL}/api/guesses/${resExistente.data.id}`, {
         guessA: Number(scoreA),
         guessB: Number(scoreB),
       }, {
@@ -93,7 +93,7 @@ export default function Palpitar() {
       setMensagens(prev => ({ ...prev, [jogoId]: 'Palpite atualizado com sucesso!' }));
     } else {
       // Cria novo palpite
-      await axios.post(`http://localhost:3000/api/guesses`, {
+      await axios.post(`${API_URL}/api/guesses`, {
         gameId: jogoId,
         guessA: Number(scoreA),
         guessB: Number(scoreB),
