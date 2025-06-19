@@ -2,13 +2,13 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { PrismaClient } from "@prisma/client";
-import authRoutes from "./routes/authRoutes.js";
-import gameRoutes from "./routes/gameRoutes.js";
-import guessRoutes from "./routes/guessRoutes.js";
-import rankingRoutes from "./routes/rankingRoutes.js";
-import syncRoutes from "./routes/syncRoutes.js";
-import adminRoutes from "./routes/adminRoutes.js";
-import userRoutes from "./routes/userRoutes.js";
+import authRoutes from "./src/routes/authRoutes.js";
+import gameRoutes from "./src/routes/gameRoutes.js";
+import guessRoutes from "./src/routes/guessRoutes.js";
+import rankingRoutes from "./src/routes/rankingRoutes.js";
+import syncRoutes from "./src/routes/syncRoutes.js";
+import adminRoutes from "./src/routes/adminRoutes.js";
+import userRoutes from "./src/routes/userRoutes.js";
 
 dotenv.config();
 
