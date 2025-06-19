@@ -15,10 +15,10 @@ dotenv.config();
 const app = express();
 const prisma = new PrismaClient();
 
-// 🔒 CORS configurado com segurança
 app.use(cors({
-  origin: process.env.FRONTEND_URL || '*',
-  credentials: true
+  origin: 'https://bolao-site.vercel.app', // substitua pelo seu domínio real da Vercel
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
 }));
 
 app.use(express.json());
