@@ -19,13 +19,13 @@ export default function Palpitar() {
         const token = localStorage.getItem('token');
 
         const [resJogos, resPalpites, resOutros] = await Promise.all([
-          api.get(`${API_URL}/api/games`, {
+          api.get(`/api/games`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          api.get(`${API_URL}/api/guesses/me`, {
+          api.get(`/api/guesses/me`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          api.get(`${API_URL}/api/guesses/all`, {
+          api.get(`/api/guesses/all`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
         ]);
@@ -77,14 +77,14 @@ export default function Palpitar() {
     const token = localStorage.getItem('token');
     const { scoreA, scoreB } = placares[jogoId] || {};
 
-    const resExistente = await api.get(`${API_URL}/api/guesses/mine/${jogoId}`, {
+    const resExistente = await api.get(`/api/guesses/mine/${jogoId}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
     if (resExistente.data) {
       // Atualiza palpite existente
       console.log(resExistente.data);
-      await api.put(`${API_URL}/api/guesses/${resExistente.data.id}`, {
+      await api.put(`/api/guesses/${resExistente.data.id}`, {
         guessA: Number(scoreA),
         guessB: Number(scoreB),
       }, {
@@ -94,7 +94,7 @@ export default function Palpitar() {
       setMensagens(prev => ({ ...prev, [jogoId]: 'Palpite atualizado com sucesso!' }));
     } else {
       // Cria novo palpite
-      await api.post(`${API_URL}/api/guesses`, {
+      await api.post(`/api/guesses`, {
         gameId: jogoId,
         guessA: Number(scoreA),
         guessB: Number(scoreB),
