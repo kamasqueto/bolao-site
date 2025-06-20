@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import { useAuthRedirect } from '../hooks/useAuthRedirect';
+import api from '../hooks/axios.js'
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Palpitar() {
@@ -18,13 +19,13 @@ export default function Palpitar() {
         const token = localStorage.getItem('token');
 
         const [resJogos, resPalpites, resOutros] = await Promise.all([
-          axios.get(`${API_URL}/api/games`, {
+          api.get(`${API_URL}/api/games`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          axios.get(`${API_URL}/api/guesses/me`, {
+          api.get(`${API_URL}/api/guesses/me`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          axios.get(`${API_URL}/api/guesses/all`, {
+          api.get(`${API_URL}/api/guesses/all`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
         ]);
@@ -76,14 +77,14 @@ export default function Palpitar() {
     const token = localStorage.getItem('token');
     const { scoreA, scoreB } = placares[jogoId] || {};
 
-    const resExistente = await axios.get(`${API_URL}/api/guesses/mine/${jogoId}`, {
+    const resExistente = await api.get(`${API_URL}/api/guesses/mine/${jogoId}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
     if (resExistente.data) {
       // Atualiza palpite existente
       console.log(resExistente.data);
-      await axios.put(`${API_URL}/api/guesses/${resExistente.data.id}`, {
+      await api.put(`${API_URL}/api/guesses/${resExistente.data.id}`, {
         guessA: Number(scoreA),
         guessB: Number(scoreB),
       }, {
@@ -93,7 +94,7 @@ export default function Palpitar() {
       setMensagens(prev => ({ ...prev, [jogoId]: 'Palpite atualizado com sucesso!' }));
     } else {
       // Cria novo palpite
-      await axios.post(`${API_URL}/api/guesses`, {
+      await api.post(`${API_URL}/api/guesses`, {
         gameId: jogoId,
         guessA: Number(scoreA),
         guessB: Number(scoreB),
